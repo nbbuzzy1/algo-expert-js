@@ -15,25 +15,20 @@
 // the target sum.
 
 const twoNumberSum = (array, targetSum) => {
-	let answer = [];
 	const hash = {};
-	
-	//Store in hash
-	array.forEach((item) => hash[item] = item);
 
 	//Loop through and check hash for number needed
-	for (let i = 0; i < array.length; i++) {
-		const currentNumber= array[i];
+	for (const currentNumber of array) {
 		const numberNeeded = targetSum - currentNumber;
 		
-		if (hash[numberNeeded] !== undefined && hash[numberNeeded] !== currentNumber) {
-			answer.push(currentNumber);
-			answer.push(numberNeeded);
-
-			return answer;
+		if (hash[numberNeeded]) {
+			return [currentNumber, numberNeeded];
+		} else {
+			//store in hash
+			hash[currentNumber] = true;
 		}
 	}
 	
-	return answer;
+	return [];
 }
   
