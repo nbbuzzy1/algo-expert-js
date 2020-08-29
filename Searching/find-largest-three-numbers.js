@@ -19,13 +19,13 @@ function findThreeLargestNumbers(array) {
 	
 	array.forEach((num) => {
 		if (largestThreeNumbers.length > 2) {
-				if (num >= largestThreeNumbers[0]) {
-					largestThreeNumbers[0] = num;
-				} else if (num >=  largestThreeNumbers[1]) {
-					largestThreeNumbers[1] = num;
-				} else if (num >=  largestThreeNumbers[2]) {
-					largestThreeNumbers[2] = num;
-				}
+			if (num >= largestThreeNumbers[0]) {
+				largestThreeNumbers[0] = num;
+			} else if (num >=  largestThreeNumbers[1]) {
+				largestThreeNumbers[1] = num;
+			} else if (num >=  largestThreeNumbers[2]) {
+				largestThreeNumbers[2] = num;
+			}
 		} else {
 			largestThreeNumbers.push(num)
 		}
