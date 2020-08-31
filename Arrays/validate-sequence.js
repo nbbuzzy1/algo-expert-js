@@ -19,13 +19,18 @@
 
 function isValidSubsequence(array, sequence) {
 	// Write your code here.
-	let sequenceIterator = 0;
-	
-	for (const num of array) {
-		if (num === sequence[sequenceIterator]) {
-			sequenceIterator++;
-		}
-	}
-	
-	return sequenceIterator === sequence.length;
-}
+	  let sequenceIterator = 0;
+	  
+	  for (const num of array) {
+		  //Stop searching through the array
+		  if (sequenceIterator === sequence.length) {
+			  break;
+		  }
+		  
+		  if (num === sequence[sequenceIterator]) {
+			  sequenceIterator++;
+		  }
+	  }
+	  
+	  return sequenceIterator === sequence.length;
+  }
