@@ -15,18 +15,29 @@
 
 function moveElementToEnd(array, toMove) {
 	// Write your code here.
-	let moveToEndArray = [];
+	let leftIndex = 0;
+	let rightIndex = array.length - 1;
 	
-	array.forEach((num) => {
-		if (num === toMove) {
-			moveToEndArray.push(num);
+	while (leftIndex < rightIndex) {
+		let leftItem = array[leftIndex];
+		let rightItem = array[rightIndex];
+
+		if (leftItem === toMove && rightItem !== toMove) {
+			array[leftIndex] = rightItem;
+			array[rightIndex] = leftItem;
+			leftIndex++;
 		} else {
-			moveToEndArray.unshift(num);
+			if (rightItem === toMove) {
+				rightIndex--;
+			}
+			if (leftItem !== toMove) {
+				leftIndex++;
+			} 			
 		}
-	});
+	}
 	
-	return moveToEndArray;
-  }
+	return array;
+}
   
   // Do not edit the line below.
   exports.moveElementToEnd = moveElementToEnd;
