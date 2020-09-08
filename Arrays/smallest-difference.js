@@ -15,17 +15,35 @@
 
 function smallestDifference(arrayOne, arrayTwo) {
 	// Write your code here.
-	  const sortArray = (array) => array.sort((a, b) => a - b);
-	  const sortedArrayOne = sortArray(arrayOne);
-	  const sortedArrayTwo = sortArray(arrayTwo);
-	  
-	  
-	  const returnAbsoluteNumber = (num1, num2) => {
-		  return num1 - num2 < 0 ? num2 - num1 : num1 - num2;
-	  }
-	  
-	// for (let i = 0; i < sortedArrayOne.length; i++) {
-	// 	  if 
-	//   }
-	  
-  }
+	const sortArray = (array) => array.sort((a, b) => a - b);
+	const sortedArrayOne = sortArray(arrayOne);
+	const sortedArrayTwo = sortArray(arrayTwo);
+
+	let indexOne = 0;
+	let indexTwo = 0;
+	let smallest = Infinity;
+	let current = Infinity;
+	let smallestPair = [];
+	
+	while (indexOne < sortedArrayOne.length && indexTwo < sortedArrayTwo.length) {
+		let firstNumber = sortedArrayOne[indexOne];
+		let secondNumber = sortedArrayTwo[indexTwo];
+		
+		if (firstNumber < secondNumber) {
+			current = secondNumber - firstNumber;
+			indexOne++;
+		} else if (secondNumber < firstNumber) {
+			current = firstNumber - secondNumber;
+			indexTwo++;
+		} else {
+			return [firstNumber, secondNumber];
+		}
+		
+		if (current < smallest) {
+			smallest = current;
+			smallestPair = [firstNumber, secondNumber];
+		}
+	}
+	
+	return smallestPair;
+}
