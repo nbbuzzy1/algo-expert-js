@@ -15,6 +15,7 @@
 
 function moveElementToEnd(array, toMove) {
 	// Write your code here.
+  
 	let leftIndex = 0;
 	let rightIndex = array.length - 1;
 	
@@ -22,20 +23,18 @@ function moveElementToEnd(array, toMove) {
 		let leftItem = array[leftIndex];
 		let rightItem = array[rightIndex];
 
-		if (leftItem === toMove && rightItem !== toMove) {
-			array[leftIndex] = rightItem;
-			array[rightIndex] = leftItem;
-			leftIndex++;
+		if (rightItem === toMove) {
+			rightIndex--;
 		} else {
-			if (rightItem === toMove) {
-				rightIndex--;
+			if (leftItem === toMove) {
+				array[leftIndex] = rightItem;
+				array[rightIndex] = leftItem;
 			}
-			if (leftItem !== toMove) {
-				leftIndex++;
-			} 			
+			
+			leftIndex++;
 		}
 	}
-	
+
 	return array;
 }
   
