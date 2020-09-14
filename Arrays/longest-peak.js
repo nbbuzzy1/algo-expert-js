@@ -15,3 +15,66 @@
 
 // Sample Output
 // 6 // 0, 10, 6, 5, -1, -3
+
+function longestPeak(array) {
+	// Write your code here.
+	if (!array.length || array.length < 2 || array.length === 2 && array[0] == array[1]) {
+		return 0;
+	}
+	
+	const evaluateDirection = (num1, num2) => {
+		const diff = num2 - num1;
+		if (diff === 0) {
+			return 'equal'
+		} else if (diff > 0) {
+			return 'increasing'
+		} else {
+			return 'decreasing'
+		}
+	}
+	
+	let peakCounter = 0;
+	let longestPeak = 0;
+	let previousDirection;
+	let hasPeaked = false;
+	
+	for (let i = 1; i < array.length; i++) {
+		let previous = array[i - 1];
+		let current = array[i];
+		let currentDirection = evaluateDirection(previous, current);
+		
+		if (currentDirection === 'equal') {
+			if (previousDirection === 'decreasing' && peakCounter > longestPeak) {
+				longestPeak = peakCounter;
+			}
+			peakCounter = 0;
+			hasPeaked = false;
+		} else {
+			if (previousDirection === 'increasing' && currentDirection === 'decreasing') {
+				hasPeaked = true;
+			}
+			if (previousDirection === 'decreasing' && currentDirection === 'increasing') {
+				if (hasPeaked && peakCounter > longestPeak) {
+					longestPeak = peakCounter;
+				}
+				hasPeaked = false;
+				peakCounter = 2;
+			} else if (currentDirection === 'decreasing' && i === array.length -1) {
+				peakCounter++;
+				if (hasPeaked && peakCounter > longestPeak) {
+					longestPeak = peakCounter;
+				}
+			} else {
+				if (!peakCounter) {
+					peakCounter = 2;
+				} else {
+					peakCounter++;
+				}
+			}
+		}
+
+		previousDirection = currentDirection;
+	}
+
+	return longestPeak;
+}
