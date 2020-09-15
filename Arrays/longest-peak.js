@@ -18,63 +18,31 @@
 
 function longestPeak(array) {
 	// Write your code here.
-	if (!array.length || array.length < 2 || array.length === 2 && array[0] == array[1]) {
-		return 0;
-	}
+	let longestPeakLength = 0
+	let i = 1;
 	
-	const evaluateDirection = (num1, num2) => {
-		const diff = num2 - num1;
-		if (diff === 0) {
-			return 'equal'
-		} else if (diff > 0) {
-			return 'increasing'
-		} else {
-			return 'decreasing'
-		}
-	}
-	
-	let peakCounter = 0;
-	let longestPeak = 0;
-	let previousDirection;
-	let hasPeaked = false;
-	
-	for (let i = 1; i < array.length; i++) {
-		let previous = array[i - 1];
-		let current = array[i];
-		let currentDirection = evaluateDirection(previous, current);
+	while (i < array.length) {
+		const isPeak = array[i -1] < array[i] && array[i + 1] < array[i];
 		
-		if (currentDirection === 'equal') {
-			if (previousDirection === 'decreasing' && peakCounter > longestPeak) {
-				longestPeak = peakCounter;
-			}
-			peakCounter = 0;
-			hasPeaked = false;
-		} else {
-			if (previousDirection === 'increasing' && currentDirection === 'decreasing') {
-				hasPeaked = true;
-			}
-			if (previousDirection === 'decreasing' && currentDirection === 'increasing') {
-				if (hasPeaked && peakCounter > longestPeak) {
-					longestPeak = peakCounter;
-				}
-				hasPeaked = false;
-				peakCounter = 2;
-			} else if (currentDirection === 'decreasing' && i === array.length -1) {
-				peakCounter++;
-				if (hasPeaked && peakCounter > longestPeak) {
-					longestPeak = peakCounter;
-				}
-			} else {
-				if (!peakCounter) {
-					peakCounter = 2;
-				} else {
-					peakCounter++;
-				}
-			}
+		if (!isPeak) {
+			i++;
+			continue;
 		}
-
-		previousDirection = currentDirection;
+		
+		let leftIdx = i - 2;
+		while (leftIdx >= 0 && array[leftIdx] < array[leftIdx + 1]) {
+			leftIdx--;
+		}
+		
+		let rightIdx = i + 2;
+		while (rightIdx < array.length && array[rightIdx] < array[rightIdx - 1]) {
+			rightIdx++;
+		}
+		
+		const currentPeakLength = rightIdx - leftIdx - 1;
+		longestPeakLength = Math.max(longestPeakLength, currentPeakLength);
+		i = rightIdx;
 	}
-
-	return longestPeak;
+	
+	return longestPeakLength;
 }
