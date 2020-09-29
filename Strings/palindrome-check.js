@@ -22,8 +22,9 @@ function isPalindrome(string) {
 			return false;
 		}
 		
-		leftPointer++
-		rightPointer--
+		leftPointer++;
+		rightPointer--;
 	}
+	
 	return true;
 }
