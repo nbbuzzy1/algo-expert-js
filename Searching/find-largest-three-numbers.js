@@ -13,24 +13,25 @@
 // [18, 141, 541]
 
 function findThreeLargestNumbers(array) {
-// Write your code here.
-	let largestThreeNumbers = [];
+	// Write your code here.
+	let largestThreeNumbers = [array[0], array[1], array[2]].sort((a, b) => a - b);
+	if (array.length === 3) return largestThreeNumbers
 	
-	array.forEach((num) => {
-		if (largestThreeNumbers.length > 2) {
-			if (num >= largestThreeNumbers[0]) {
-				largestThreeNumbers[0] = num;
-			} else if (num >=  largestThreeNumbers[1]) {
-				largestThreeNumbers[1] = num;
-			} else if (num >=  largestThreeNumbers[2]) {
-				largestThreeNumbers[2] = num;
-			}
-		} else {
-			largestThreeNumbers.push(num)
+	for (let i = array.length - 1; i > 2; i--) {
+		if (array[i] >= largestThreeNumbers[2]) {
+			const temp = largestThreeNumbers[2]
+			const temp2 = largestThreeNumbers[1]
+			largestThreeNumbers[2] = array[i];
+			largestThreeNumbers[1] = temp;
+			largestThreeNumbers[0] = temp2;
+		} else if (array[i] >= largestThreeNumbers[1]) {
+			const temp = largestThreeNumbers[1]
+			largestThreeNumbers[1] = array[i];
+			largestThreeNumbers[0] = temp;
+		} else if (array[i] >= largestThreeNumbers[0]) {
+			largestThreeNumbers[0] = array[i];
 		}
-
-		largestThreeNumbers = largestThreeNumbers.sort((a, b) => a - b);
-	});
-
+	}
+	
 	return largestThreeNumbers;
 }
