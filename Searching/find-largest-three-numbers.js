@@ -14,24 +14,32 @@
 
 function findThreeLargestNumbers(array) {
 	// Write your code here.
-	let largestThreeNumbers = [array[0], array[1], array[2]].sort((a, b) => a - b);
-	if (array.length === 3) return largestThreeNumbers
+	//Initialize the largestThreeNumbers array
+	let threeLargest = [null, null, null]
 	
-	for (let i = array.length - 1; i > 2; i--) {
-		if (array[i] >= largestThreeNumbers[2]) {
-			const temp = largestThreeNumbers[2]
-			const temp2 = largestThreeNumbers[1]
-			largestThreeNumbers[2] = array[i];
-			largestThreeNumbers[1] = temp;
-			largestThreeNumbers[0] = temp2;
-		} else if (array[i] >= largestThreeNumbers[1]) {
-			const temp = largestThreeNumbers[1]
-			largestThreeNumbers[1] = array[i];
-			largestThreeNumbers[0] = temp;
-		} else if (array[i] >= largestThreeNumbers[0]) {
-			largestThreeNumbers[0] = array[i];
-		}
+	for (const num of array) {
+		updateLargest(threeLargest, num)
 	}
 	
-	return largestThreeNumbers;
+	return threeLargest
+}
+
+function updateLargest(threeLargest, num) {
+	if (threeLargest[2] === null || num > threeLargest[2]) {
+		shiftAndUpdate(threeLargest, num, 2)
+	} else if (threeLargest[1] === null || num > threeLargest[1]) {
+		shiftAndUpdate(threeLargest, num, 1)
+	} else if (threeLargest[0] === null || num > threeLargest[0]) {
+		shiftAndUpdate(threeLargest, num, 0)
+	}
+}
+
+function shiftAndUpdate(array, num, idx) {
+	for (let i = 0; i <= idx; i++) {
+		if (i === idx) {
+			array[i] = num;
+		} else {
+			array[i] = array[i + 1]
+		}
+	}
 }
