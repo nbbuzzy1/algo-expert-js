@@ -22,3 +22,31 @@
 
 // Sample Output
 // 13
+
+function findClosestValueInBst(tree, target) {
+	// Write your code here.
+	let closestValue = tree.value;
+	
+	while (tree !== null) {
+		const closestValueAbsolute = getAbsoluteValue(target, closestValue);
+		const currentValueAbsolute = getAbsoluteValue(target, tree.value);
+
+		if (closestValueAbsolute > currentValueAbsolute) {
+			closestValue = tree.value;
+		}
+		
+		if (target < tree.value) {
+			tree = tree.left;
+		} else if (target > tree.value) {
+			tree = tree.right;
+		} else {
+			break;
+		}
+	}
+
+	return closestValue;
+}
+
+function getAbsoluteValue(num1, num2) {
+	return Math.abs(num1 - num2);
+}
