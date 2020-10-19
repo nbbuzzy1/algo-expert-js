@@ -14,25 +14,16 @@
 
 function numberOfWaysToMakeChange(n, denoms) {
 	// Write your code here.
-	  let num = 0;
-	  let denomHash = {};
-	  denoms.forEach((denom) => denomHash[denom] = true)
-	  
-	  denoms.forEach((denom) => {
-		  if (n % denom === 0) {
-			  num++;
-		  }
-		  
-		  let i = denom;
-		  while (i < n) {
-			  const difference = n - i;
-			  console.log(difference, i , denomHash);
-			  if (denomHash[difference]) {
-				  num++;
-			  }
-			  i+=denom;
-		  }
-	  });
-	  console.log(num)
-	  return num;
-  }
+	const ways = new Array(n + 1).fill(0);
+	ways[0] = 1;
+	
+	for (const denom of denoms) {
+		for (let amount = 1; amount < n + 1; amount++) {
+			if (denom <= amount) {
+				ways[amount] += ways[amount - denom]
+			}
+		}		
+	}
+	
+	return ways[n]
+}
