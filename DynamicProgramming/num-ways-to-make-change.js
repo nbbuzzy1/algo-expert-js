@@ -20,10 +20,10 @@ function numberOfWaysToMakeChange(n, denoms) {
 	for (const denom of denoms) {
 		for (let amount = 1; amount < n + 1; amount++) {
 			if (denom <= amount) {
-				ways[amount] += ways[amount - denom]
+				ways[amount] += ways[amount - denom];
 			}
 		}		
 	}
 	
-	return ways[n]
+	return ways[n];
 }
