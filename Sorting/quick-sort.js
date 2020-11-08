@@ -12,43 +12,17 @@
 
 function quickSort(array) {
 	// Write your code here.
-	quickSortHelper(array, 0, array.length - 1)
-	return array
-  }
-  
-function quickSortHelper(array, startIdx, endIdx) {
-	if (startIdx >= endIdx) {
-		return
+	if (array.length < 1) return array;
+
+	const pivot = array[0];
+	const leftArray = [];
+	const rightArray = [];
+
+	for (const elem of array.slice(1, array.length)) {
+		elem < pivot ? leftArray.push(elem) : rightArray.push(elem);
 	}
-	pivotIdx = startIdx
-	leftIdx = startIdx + 1
-	rightIdx = endIdx
-	
-	while (rightIdx >= leftIdx) {
-		if (array[leftIdx] > array[pivotIdx] && array[rightIdx] < array[pivotIdx]) {
-			swap(leftIdx, rightIdx, array)
-		}
-		
-		if (array[leftIdx] <= array [pivotIdx]) {
-			leftIdx++
-		}
-		
-		if (array[rightIdx] >= array[pivotIdx]) {
-			rightIdx--
-		}
-	}
-	
-	swap(pivotIdx, rightIdx, array)
-	
-	leftSubarrayIsSmaller = (rightIdx - 1 - startIdx) < endIdx - (rightIdx + 1) 
-	
-	if (leftSubarrayIsSmaller) {
-		quickSortHelper(array, startIdx, rightIdx - 1)
-		quickSortHelper(array, rightIdx + 1, endIdx)
-	} else {
-		quickSortHelper(array, rightIdx + 1, endIdx)
-		quickSortHelper(array, startIdx, rightIdx - 1)
-	}
+
+	return [...quickSort(leftArray), pivot, ...quickSort(rightArray)];
 }
 
 function swap(i, j, array) {
@@ -56,4 +30,3 @@ function swap(i, j, array) {
 	array[i] = array[j];
 	array[j] = temp;
 }
-  
