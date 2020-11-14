@@ -12,3 +12,24 @@
 
 // Sample Output
 // [[7, 6, 4, -1], [7, 6, 1, 2]] // the quadruplets could be ordered differently
+
+function fourNumberSum(array, targetSum) {
+	// Write your code here.
+	const pairSums = {};
+	const quads = [];
+	for (let i = 0; i < array.length - 1; i++) {
+		for (let j = i + 1; j < array.length; j++) {
+			const currentSum = array[i] + array[j];
+			const diff = targetSum - currentSum;
+			if (pairSums[diff] === undefined) continue
+
+			pairSums[diff].forEach((pair) => quads.push([...pair, array[i], array[j]]));
+		}
+		for (let j = i - 1; j >= 0; j--) {
+			const pairSum = array[i] + array[j];
+			pairSums[pairSum] === undefined ? pairSums[pairSum] = [[array[i], array[j]]] : pairSums[pairSum].push([array[i], array[j]]);
+		}
+	}
+
+	return quads;
+}
