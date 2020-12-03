@@ -26,18 +26,12 @@ function balancedBrackets(string) {
 	}
 	const stack = [];
 
-	for (let i = 0; i < string.length; i ++) {
-		const character = string[i];
-				
+	for (const character of string) {
+		if (!openingBrackets.includes(character) || !closingBrackets.includes(character)) return;
+
 		if (openingBrackets.includes(character)) {
 			stack.push(character);
-		} 
-		
-		if (closingBrackets.includes(character)) {
-			if (!stack.length) {
-				return false;
-			}
-			
+		} {
 			const bracket = stack.pop();
 			if (matchingBrackets[character] !== bracket) {
 				return false;
