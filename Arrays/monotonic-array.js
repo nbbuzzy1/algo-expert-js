@@ -12,48 +12,14 @@
 // Sample Output
 // true
 
-function isMonotonic(array) {
-	// Write your code here.
-	if (!array.length || array.length === 1) {
-		return true;
-	}
-	
-	let isIncreasing;
-	let previous = array[0];
-	
-	for (let i = 1; i < array.length; i++) {
-		const current = array[i];
-		
-		if (isIncreasing === undefined && previous !== current) {
-			isIncreasing = current > previous;
-		}
-		
-		if (isIncreasing) {
-			if (previous > current) {
-				return false;
-			}
-		} else if (isIncreasing === false) {
-			if (previous < current) {
-				return false;
-			}
-		}
-		
-		previous = array[i]
-	}
-	
-	return true;
-}
-
-//Alternate solution
-function isMonotonic(array) {
-// Write your code here.
+const isMonotonic = (array) => {
 	let isNonDecreasing = true;
 	let isNonIncreasing = true;
-	
+
 	for (let i = 1; i < array.length; i++) {
 		if (array[i] < array[i - 1]) isNonDecreasing = false;
 		if (array[i] > array[i - 1]) isNonIncreasing = false;
 	}
-	
+
 	return isNonDecreasing || isNonIncreasing;
 }
