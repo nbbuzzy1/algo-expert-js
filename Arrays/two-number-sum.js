@@ -19,7 +19,7 @@ const twoNumberSum = (array, targetSum) => {
 	//Loop through and check hash for number needed
 	for (const currentNumber of array) {
 		const numberNeeded = targetSum - currentNumber;
-		
+
 		if (hash[numberNeeded]) {
 			return [currentNumber, numberNeeded];
 		} else {
@@ -27,7 +27,41 @@ const twoNumberSum = (array, targetSum) => {
 			hash[currentNumber] = true;
 		}
 	}
-	
+
 	return [];
 }
-  
+/**
+const twoSum = (nums, target) => {
+	const sortedNums = nums.map((num, index) => {
+		return { num, index }
+	}).sort((a, b) => a.num - b.num);
+
+	let left = 0;
+	let right = nums.length - 1;
+
+	while (left < right) {
+		const currentSum = sortedNums[left].num + sortedNums[right].num;
+		if (currentSum === target) {
+			return [sortedNums[left].index, sortedNums[right].index];
+		} else if (currentSum < target) {
+			left++;
+		} else {
+			right--;
+		}
+	}
+};
+
+const twoSum = (nums, target) => {
+	const numsHash= {};
+
+	for (let i = 0; i < nums.length; i++) {
+		const currentVal = nums[i];
+		const currentDiff = target - currentVal;
+		if (numsHash[currentDiff] !== undefined) {
+			return [i, numsHash[currentDiff]]
+		} else {
+			numsHash[currentVal] = i;
+		}
+	}
+}
+*/

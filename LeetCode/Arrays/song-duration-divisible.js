@@ -21,18 +21,25 @@
 // 1 <= time.length <= 6 * 104
 // 1 <= time[i] <= 500
 
+/**
+ * @param {number[]} time
+ * @return {number}
+ */
 const numPairsDivisibleBy60 = (time) => {
+	const divisibleHash = {};
 	let numPairs = 0;
-	const divisibleBy60Hash = {};
 
-	for (const t of time) {
-		if (t % 60 === 0) {
-			if (divisibleBy60Hash[0]) numPairs += divisibleBy60Hash[0];
-		} else {
-			if (divisibleBy60Hash[60 - t % 60]) numPairs += divisibleBy60Hash[60 - t % 60];
+	for (const seconds of time) {
+		//Check if pair exists
+		const div = seconds % 60;
+		const diffNeeded = div === 0 ? 0 : 60 - div;
+
+		if (divisibleHash[diffNeeded] !== undefined) {
+			numPairs += divisibleHash[diffNeeded];
 		}
 
-		!divisibleBy60Hash[t % 60] ? divisibleBy60Hash[t % 60] = 1 : divisibleBy60Hash[t % 60]++;
+		//Update hash
+		divisibleHash[div] !== undefined ? divisibleHash[div]++ : divisibleHash[div] = 1;
 	}
 
 	return numPairs;
